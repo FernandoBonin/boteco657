@@ -1,0 +1,8 @@
+{
+  "name": "Boteco 647 - Cardápio Digital",
+  "description": "Cardápio digital premium para o Boteco 647 com categorização bento grid, visualização de itens com fotos e carrinho integrado.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
