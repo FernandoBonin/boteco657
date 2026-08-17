@@ -8,6 +8,7 @@ import {
   Heart,
   StarIcon,
 } from "lucide-react";
+import { Icon } from "@iconify/react";
 
 interface HeaderProps {
   onBackHome?: () => void;
@@ -42,26 +43,8 @@ export default function Header({
           <div className="w-10 h-10"></div>
         )}
 
-        {/* Center brand title */}
-        <div className="flex flex-col items-center text-center">
-          {categoryName ? (
-            <div className="flex flex-col items-center">
-              <span className="text-xs uppercase tracking-widest text-secondary font-semibold">
-                Boteco 647
-              </span>
-              <h1 className="font-serif text-2xl font-bold text-primary tracking-tight">
-                {categoryName}
-              </h1>
-            </div>
-          ) : (
-            <h1 className="font-serif text-xl font-bold text-primary tracking-wider">
-              BOTECO 647
-            </h1>
-          )}
-        </div>
-
-        {/* Floating actions right side */}
-        <div className="flex items-center gap-2">
+        {/* Modal avaliações */}
+        {/* <div className="flex items-center gap-2">
           {onOpenCart && (
             <button
               id="cart-button-header"
@@ -75,7 +58,7 @@ export default function Header({
               </div>
             </button>
           )}
-        </div>
+        </div> */}
       </div>
 
       {/* Main expanded brand header for the main page */}
@@ -102,11 +85,46 @@ export default function Header({
             </div>
           </div>
 
-          <h3 className="font-sans text-xl font-bold text-dark-charcoal mt-3">
+          <div className="flex flex-col items-center gap-3 mb-1">
+            <h5 className="font-sans text-xl font-bold text-dark-charcoal mt-3">
+              Faça seu pedido
+            </h5>
+            <a href="https://www.ifood.com.br/delivery/sao-paulo-sp/boteco-647-vila-carrao/4ad6ecd3-1489-432a-8914-1e851bb6ae19">
+              <Icon
+                icon="simple-icons:ifood"
+                className="text-[#ea1d2c] w-auto h-6"
+              />
+            </a>
+          </div>
+          <div className="flex flex-col items-center gap-3 mb-10 mt-2">
+            <h5 className="text-xs font-semibold tracking-wider uppercase text-[#594140]/70">
+              Nossas redes
+            </h5>
+            <div className="flex gap-3">
+              <a href="https://www.facebook.com/boteco647">
+                <Icon
+                  icon="simple-icons:facebook"
+                  className="text-[#0062e0] w-auto h-6"
+                />
+              </a>
+              <a href="https://www.instagram.com/boteco647">
+                <Icon
+                  icon="simple-icons:instagram"
+                  className="text-[#C13584] w-auto h-6"
+                />
+              </a>
+              <a href="https://wa.me/5511975931647">
+                <Icon
+                  icon="simple-icons:whatsapp"
+                  className="text-[#25D366] w-auto h-6"
+                />
+              </a>
+            </div>
+          </div>
+
+          {/* <h3 className="font-sans text-xl font-bold text-dark-charcoal mt-3">
             Faça seu pedido
           </h3>
-
-          {/* Social Network shortcuts */}
           <div className="flex flex-col items-center mt-4 gap-1.5">
             <span className="text-xs font-semibold tracking-wider uppercase text-[#594140]/70">
               Nossas redes
@@ -138,7 +156,7 @@ export default function Header({
                 <Phone className="w-6 h-6" />
               </a>
             </div>
-          </div>
+          </div> */}
 
           {/* Elegant Divider with custom icon */}
           <div className="flex items-center justify-center gap-4 w-full max-w-sm mt-8 mb-4 opacity-50">

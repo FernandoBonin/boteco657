@@ -112,7 +112,7 @@ export default function MenuSection({
                       key={item.id}
                       variants={cardVariants}
                       whileHover={{ y: -3 }}
-                      className="bg-white rounded-2xl overflow-hidden shadow-[0_4px_16px_rgba(82,57,47,0.05)] border border-[#e0bfbd]/20 flex flex-col sm:flex-row group transition-all duration-300 relative"
+                      className="bg-white rounded-2xl max-h-65 overflow-hidden shadow-[0_4px_16px_rgba(82,57,47,0.05)] border border-[#e0bfbd]/20 flex flex-col sm:flex-row group transition-all duration-300 relative"
                     >
                       {/* Visual Highlight Badge */}
                       {item.isHighlighted && (
@@ -125,7 +125,7 @@ export default function MenuSection({
                       {/* Item Image */}
                       {item.image && (
                         <div
-                          className="w-full sm:w-52 h-48 overflow-hidden relative cursor-pointer shrink-0"
+                          className="w-full sm:w-52 items-stretch overflow-hidden relative cursor-pointer shrink-0"
                           onClick={() => handleSelectItem(item)}
                         >
                           <Image

@@ -73,7 +73,7 @@ export default function Cart({ isOpen, onClose }: CartProps) {
     loadReviews();
   }, []);
 
-  console.log("AVALIACAO", avaliacao);
+  // console.log("AVALIACAO", avaliacao);
 
   return (
     <AnimatePresence>

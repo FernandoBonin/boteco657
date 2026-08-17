@@ -41,3 +41,39 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-primary);
 }
+
+.bottom-nav-scroll {
+  scrollbar-width: none;
+}
+
+/* Chrome, Edge e Safari */
+.bottom-nav-scroll::-webkit-scrollbar {
+  height: 0;
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+  .bottom-nav-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: #82021a #eadfce;
+  }
+
+  .bottom-nav-scroll::-webkit-scrollbar {
+    height: 8px;
+  }
+
+  .bottom-nav-scroll::-webkit-scrollbar-track {
+    background: #eadfce;
+    border-radius: 999px;
+  }
+
+  .bottom-nav-scroll::-webkit-scrollbar-thumb {
+    background: #82021a;
+    border-radius: 999px;
+    border: 2px solid #eadfce;
+  }
+
+  .bottom-nav-scroll::-webkit-scrollbar-thumb:hover {
+    background: #651015;
+  }
+}

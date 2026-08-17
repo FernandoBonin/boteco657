@@ -1,3 +1,4 @@
+import { LucideIcon } from "lucide-react";
 import { StaticImageData } from "next/image";
 
 export interface Category {
@@ -5,7 +6,7 @@ export interface Category {
   name: string;
   description?: string;
   image: StaticImageData;
-  icon: string; // Name of lucide-react icon
+  icon: LucideIcon; // Name of lucide-react icon
   featured?: boolean; // Large card span
 }
 

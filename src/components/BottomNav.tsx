@@ -1,57 +1,66 @@
-import React from 'react';
-import { Flame, Soup, Utensils, Beef, GlassWater, Home } from 'lucide-react';
+import { Home } from "lucide-react";
+import { categories } from "../data/menu";
 
 interface BottomNavProps {
   activeCategoryId: string | null;
   onSelectCategory: (id: string | null) => void;
 }
 
-export default function BottomNav({ activeCategoryId, onSelectCategory }: BottomNavProps) {
-  const navItems = [
-    { id: 'bbq', label: 'B.B.Q', icon: Flame },
-    { id: 'feijoada', label: 'Feijoada', icon: Soup },
-    { id: 'boteco', label: 'Boteco', icon: Utensils },
-    { id: 'steak', label: 'Steak', icon: Beef },
-    { id: 'drinks', label: 'Drinks', icon: GlassWater },
-  ];
-
+export default function BottomNav({
+  activeCategoryId,
+  onSelectCategory,
+}: BottomNavProps) {
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-[#fef9ed]/95 backdrop-blur-lg border-t border-[#e0bfbd]/30 shadow-lg rounded-t-2xl pb-safe">
-      <div className="max-w-md mx-auto px-4 py-2 flex items-center justify-between h-16">
-        {/* Home option */}
-        <button
-          id="nav-home"
-          onClick={() => onSelectCategory(null)}
-          className={`flex flex-col items-center justify-center transition-all duration-200 ${
-            activeCategoryId === null
-              ? 'bg-[#82021a] text-white rounded-full px-3.5 py-1.5 shadow-md scale-105'
-              : 'text-[#594140] hover:text-[#82021a]'
-          }`}
+    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-bg-parchment/95 backdrop-blur-lg border-t border-[#e0bfbd]/30 shadow-lg">
+      <div className="bottom-nav-scroll overflow-x-auto overflow-y-hidden overscroll-x-contain">
+        <div
+          className="grid grid-flow-col auto-cols-25 md:auto-cols-27.5 w-max min-w-full h-17.5 px-2 py-1.5
+          "
         >
-          <Home className="w-5 h-5" />
-          <span className="text-[10px] font-bold mt-0.5">Início</span>
-        </button>
+          <button
+            id="nav-home"
+            onClick={() => onSelectCategory(null)}
+            className={`flex flex-col items-center justify-center gap-0.5 min-w-0 transition-all duration-200 cursor-pointer ${
+              activeCategoryId === null
+                ? "bg-primary text-white rounded-2xl shadow-md"
+                : "text-[#594140] hover:text-primary"
+            }
+            `}
+          >
+            <Home className="w-5 h-5 shrink-0" />
 
-        {navItems.map((item) => {
-          const IconComponent = item.icon;
-          const isActive = activeCategoryId === item.id;
+            <span className="text-[10px] font-bold leading-tight text-center">
+              Início
+            </span>
+          </button>
 
-          return (
-            <button
-              id={`nav-item-${item.id}`}
-              key={item.id}
-              onClick={() => onSelectCategory(item.id)}
-              className={`flex flex-col items-center justify-center transition-all duration-200 ${
-                isActive
-                  ? 'bg-[#82021a] text-white rounded-full px-3.5 py-1.5 shadow-md scale-105'
-                  : 'text-[#594140] hover:text-[#82021a]'
-              }`}
-            >
-              <IconComponent className="w-5 h-5" />
-              <span className="text-[10px] font-bold mt-0.5">{item.label}</span>
-            </button>
-          );
-        })}
+          {categories.map((item) => {
+            const IconComponent = item.icon;
+            const isActive = activeCategoryId === item.id;
+
+            return (
+              <button
+                id={`nav-item-${item.id}`}
+                key={item.id}
+                onClick={() => onSelectCategory(item.id)}
+                className={`flex flex-col items-center justify-center gap-0.5 min-w-0 transition-all duration-200 cursor-pointer ${
+                  isActive
+                    ? "bg-primary text-white rounded-2xl shadow-md"
+                    : "text-[#594140] hover:text-primary"
+                }
+                `}
+              >
+                {IconComponent && (
+                  <IconComponent className="w-5 h-5 shrink-0" />
+                )}
+
+                <span className="text-[10px] font-bold leading-tight text-center px-1 line-clamp-2">
+                  {item.name}
+                </span>
+              </button>
+            );
+          })}
+        </div>
       </div>
     </nav>
   );
