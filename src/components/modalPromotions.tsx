@@ -42,9 +42,9 @@ export const ModalPromotions = ({ title, items }: ModalPromotionsProps) => {
 
     setIsOpen(false);
   };
-  
+
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog disablePointerDismissal open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent
         showCloseButton={false}
         className="w-[calc(100%-2rem)] sm:max-w-2xl overflow-hidden"
