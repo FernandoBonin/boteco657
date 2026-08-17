@@ -112,7 +112,7 @@ export default function MenuSection({
                       key={item.id}
                       variants={cardVariants}
                       whileHover={{ y: -3 }}
-                      className="bg-white rounded-2xl max-h-65 overflow-hidden shadow-[0_4px_16px_rgba(82,57,47,0.05)] border border-[#e0bfbd]/20 flex flex-col sm:flex-row group transition-all duration-300 relative"
+                      className="bg-white rounded-2xl overflow-hidden shadow-[0_4px_16px_rgba(82,57,47,0.05)] border border-[#e0bfbd]/20 flex flex-col sm:flex-row group transition-all duration-300 relative"
                     >
                       {/* Visual Highlight Badge */}
                       {item.isHighlighted && (
@@ -125,15 +125,14 @@ export default function MenuSection({
                       {/* Item Image */}
                       {item.image && (
                         <div
-                          className="w-full sm:w-52 items-stretch overflow-hidden relative cursor-pointer shrink-0"
+                          className="relative h-52 sm:w-52 sm:h-auto sm:self-stretch overflow-hidden cursor-pointer shrink-0"
                           onClick={() => handleSelectItem(item)}
                         >
                           <Image
-                            width={600}
-                            height={600}
+                            fill
                             src={item.image}
                             alt={item.name}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            className="object-cover group-hover:scale-105 transition-transform duration-500"
                             referrerPolicy="no-referrer"
                           />
                           <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors" />
@@ -215,7 +214,7 @@ export default function MenuSection({
       )}
 
       {/* Retro Brand Sub-footer mark */}
-      <div className="py-12 flex items-center justify-center opacity-30 mt-8">
+      <div className="py-12 flex items-center justify-center opacity-30">
         <div className="h-px w-20 bg-[#52392f]"></div>
         <div className="mx-4 font-serif text-primary font-bold tracking-widest text-sm">
           647

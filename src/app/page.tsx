@@ -14,7 +14,7 @@ export default function Home() {
   const [isCartOpen, setIsCartOpen] = useState(false);
 
   return (
-    <div className="min-h-screen pb-32 font-sans relative overflow-x-hidden selection:bg-primary/20">
+    <div className="min-h-screen font-sans relative overflow-x-hidden selection:bg-primary/20">
       <div className="fixed inset-0 pointer-events-none grain-texture z-0" />
 
       <Header
