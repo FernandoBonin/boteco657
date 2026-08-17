@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import Header from "../components/Header";
@@ -11,10 +11,13 @@ import { ModalPromotions } from "@/components/modalPromotions";
 
 //promotion images
 import boloMorango from "@/assets/lib/images/newImg/boloMorango.jpg";
-import xCostela from "@/assets/lib/images/newImg/xCostela.jpeg";
+
+export const STORAGE_KEY = "boteco647-promotions-seen";
+const TWELVE_HOURS = 12 * 60 * 60 * 1000;
 
 export default function Home() {
   const router = useRouter();
+  const [isPromotionsOpen, setIsPromotionsOpen] = useState(false);
 
   const [isCartOpen, setIsCartOpen] = useState(false);
 
@@ -31,34 +34,59 @@ export default function Home() {
       estimatedTime: null,
       isHighlighted: false,
     },
-    {
-      id: "smash-11",
-      categoryId: "smash",
-      name: "X- costela 647",
-      description:
-        "Pão australiano, hambúrguer 180g, molho barbecue e queijo prato. Acompanha batata rústica. Turbine seu lanche até 3 adicionais a sua escolha: Picles | Farofa de Bacon | Dijon | Rúcula | Alface crespa | Tomate | Cebola caramelizada | Queijo mussarela | Queijo prato",
-      price: 64.9,
-      oldPrice: null,
-      image: xCostela,
-      isAvailable: true,
-      estimatedTime: null,
-      isHighlighted: false,
-    },
   ];
+
+  useEffect(() => {
+    const stored = localStorage.getItem(STORAGE_KEY);
+
+    // Nunca viu
+    if (!stored) {
+      setIsPromotionsOpen(true);
+      return;
+    }
+
+    const expiresAt = Number(stored);
+
+    // Já passaram 12 horas
+    if (Date.now() >= expiresAt) {
+      localStorage.removeItem(STORAGE_KEY);
+      setIsPromotionsOpen(true);
+    }
+  }, []);
+
+  const handleClosePromotions = () => {
+    const alreadySeen = localStorage.getItem(STORAGE_KEY);
+
+    // Só cria o período de 12h quando ainda não existir
+    if (!alreadySeen) {
+      const expiresAt = Date.now() + TWELVE_HOURS;
+
+      localStorage.setItem(STORAGE_KEY, expiresAt.toString());
+    }
+
+    setIsPromotionsOpen(false);
+  };
 
   return (
     <div className="min-h-screen font-sans relative overflow-x-hidden selection:bg-primary/20">
       <div className="fixed inset-0 pointer-events-none grain-texture z-0" />
 
-      <ModalPromotions title={"Novidades do boteco 647"} items={promotions} />
+      <ModalPromotions
+        title={"Novidades do boteco 647"}
+        items={promotions}
+        open={isPromotionsOpen}
+        onClose={handleClosePromotions}
+      />
 
       <Header
         onBackHome={() => router.back()}
         showBackButton={false}
         onOpenCart={() => setIsCartOpen(true)}
+        isHome={true}
+        setIsPromotionsOpen={setIsPromotionsOpen}
       />
 
-      <main className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 pt-4">
+      <main className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 pt-4 mb-24">
         <CategoryGrid
           onSelectCategory={(categoryId) => {
             router.push(`/category/${categoryId}`);

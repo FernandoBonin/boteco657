@@ -18,33 +18,46 @@ import { useState } from "react";
 import { MenuItem } from "@/types";
 import { CardItem } from "./cardItem";
 import { X } from "lucide-react";
+import { STORAGE_KEY } from "@/app/page";
 
 type ModalPromotionsProps = {
   title: string;
   items: MenuItem[];
+  open?: boolean;
+  onClose?: () => void;
 };
 
-export const ModalPromotions = ({ title, items }: ModalPromotionsProps) => {
-  const [isOpen, setIsOpen] = useState(true);
-
+export const ModalPromotions = ({
+  title,
+  items,
+  open,
+  onClose,
+}: ModalPromotionsProps) => {
   const [api, setApi] = useState<CarouselApi>();
 
   const handleClose = () => {
-    if (!api) {
-      setIsOpen(false);
+    if (items.length <= 1) {
+      onClose?.();
       return;
     }
 
-    if (api.canScrollNext()) {
+    const alreadySeen = localStorage.getItem(STORAGE_KEY);
+
+    if (alreadySeen) {
+      onClose?.();
+      return;
+    }
+
+    if (api?.canScrollNext()) {
       api.scrollNext();
       return;
     }
 
-    setIsOpen(false);
+    onClose?.();
   };
 
   return (
-    <Dialog disablePointerDismissal open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog disablePointerDismissal open={open} onOpenChange={() => {}}>
       <DialogContent
         showCloseButton={false}
         className="w-[calc(100%-2rem)] sm:max-w-2xl overflow-hidden"
@@ -60,7 +73,7 @@ export const ModalPromotions = ({ title, items }: ModalPromotionsProps) => {
         <DialogHeader className="h-10 justify-center">
           <DialogTitle className="text-lg">{title}</DialogTitle>
         </DialogHeader>
-        <div className="w-full min-w-0 px-10">
+        <div className="w-full min-w-0">
           {items.length > 1 ? (
             <Carousel setApi={setApi} className="w-full min-w-0">
               <CarouselContent>
@@ -75,8 +88,9 @@ export const ModalPromotions = ({ title, items }: ModalPromotionsProps) => {
                 })}
               </CarouselContent>
 
-              <CarouselPrevious />
-              <CarouselNext />
+              <CarouselPrevious className="left-3 top-25 bottom-auto my-0 -translate-y-1/2 sm:left-3 sm:top-1/2 size-8 sm:size-9 z-20 bg-white/90 hover:bg-white shadow-md" />
+
+              <CarouselNext className="right-3 top-25 bottom-auto my-0 -translate-y-1/2 sm:right-3 sm:top-1/2 size-8 sm:size-9 z-20 bg-white/90 hover:bg-white shadow-md" />
             </Carousel>
           ) : (
             <CardItem item={items[0]} />

@@ -15,6 +15,8 @@ interface HeaderProps {
   showBackButton?: boolean;
   categoryName?: string;
   onOpenCart?: () => void;
+  setIsPromotionsOpen?: (v: boolean) => void;
+  isHome?: boolean;
 }
 
 export default function Header({
@@ -22,6 +24,8 @@ export default function Header({
   showBackButton = false,
   categoryName,
   onOpenCart,
+  setIsPromotionsOpen,
+  isHome,
 }: HeaderProps) {
   return (
     <header className="relative w-full bg-bg-parchment/90 backdrop-blur-md border-b border-[#e0bfbd]/30 top-0 z-40 px-4 py-3 flex flex-col items-center">
@@ -30,7 +34,7 @@ export default function Header({
 
       {/* Dynamic top bar */}
       <div className="w-full max-w-5xl flex items-center justify-between z-10 relative">
-        {showBackButton ? (
+        {showBackButton && (
           <button
             id="back-button"
             onClick={onBackHome}
@@ -39,14 +43,20 @@ export default function Header({
           >
             <ArrowLeft className="w-5 h-5" />
           </button>
-        ) : (
-          <div className="w-10 h-10"></div>
         )}
 
         {/* Modal avaliações */}
-        {/* <div className="flex items-center gap-2">
-          {onOpenCart && (
+        {isHome && (
+          <div className="flex items-center justify-end gap-2 w-full">
             <button
+              className="relative rounded-lg px-3 py-1.5 h-full bg-transparent border border-solid border-secondary text-white flex items-center justify-center hover:opacity-90 active:scale-95 transition-all cursor-pointer"
+              onClick={() => setIsPromotionsOpen(true)}
+            >
+              <div className="text-xs leading-5 font-semibold flex items-center gap-1">
+                <p className="text-dark-charcoal">Novidades</p>
+              </div>
+            </button>
+            {/* <button
               id="cart-button-header"
               onClick={onOpenCart}
               className="relative rounded-lg px-3 py-1.5 bg-transparent border border-solid border-secondary text-white flex items-center justify-center hover:opacity-90 active:scale-95 transition-all cursor-pointer"
@@ -56,9 +66,9 @@ export default function Header({
                 <p className="text-dark-charcoal">Avaliações</p>
                 <StarIcon className="fill-amber-500 text-amber-400 size-5" />
               </div>
-            </button>
-          )}
-        </div> */}
+            </button> */}
+          </div>
+        )}
       </div>
 
       {/* Main expanded brand header for the main page */}

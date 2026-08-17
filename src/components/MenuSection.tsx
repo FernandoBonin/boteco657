@@ -103,7 +103,7 @@ export default function MenuSection({
 
               <div className="space-y-6">
                 {items.map((item) => {
-                  return <CardItem item={item} onSelectItem={onSelectItem} />;
+                  return <CardItem key={item.id} item={item} onSelectItem={onSelectItem} />;
                 })}
               </div>
             </div>
