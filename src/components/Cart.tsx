@@ -19,11 +19,11 @@ interface Review {
   publishTime: string;
 }
 
-const getAvaliações = async (): Promise<Review[]> => {
-  const get = await fetch("/api/reviews");
-  const data = await get.json();
-  return data.reviews;
-};
+// const getAvaliações = async (): Promise<Review[]> => {
+//   const get = await fetch("/api/reviews");
+//   const data = await get.json();
+//   return data.reviews;
+// };
 
 export default function Cart({ isOpen, onClose }: CartProps) {
   const [tableName, setTableName] = useState("");
@@ -63,15 +63,15 @@ export default function Cart({ isOpen, onClose }: CartProps) {
     onClose();
   };
 
-  useEffect(() => {
-    const loadReviews = async () => {
-      const reviews = await getAvaliações();
-      const filterReviews = reviews.filter((rev) => rev.rating >= 4);
-      setAvaliacao(filterReviews);
-    };
+  // useEffect(() => {
+  //   const loadReviews = async () => {
+  //     const reviews = await getAvaliações();
+  //     const filterReviews = reviews.filter((rev) => rev.rating >= 4);
+  //     setAvaliacao(filterReviews);
+  //   };
 
-    loadReviews();
-  }, []);
+  //   loadReviews();
+  // }, []);
 
   // console.log("AVALIACAO", avaliacao);
 
